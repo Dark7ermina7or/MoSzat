@@ -39,6 +39,7 @@ Button/styles/focus = SubResource("StyleBoxTexture_4jbwf")
 Button/styles/hover = SubResource("StyleBoxTexture_novls")
 Button/styles/normal = SubResource("StyleBoxTexture_f7663")
 Button/styles/pressed = SubResource("StyleBoxTexture_o1cun")
+CheckButton/constants/align_to_largest_stylebox = 1
 MarginContainer/constants/margin_bottom = 48
 MarginContainer/constants/margin_left = 64
 MarginContainer/constants/margin_right = 48

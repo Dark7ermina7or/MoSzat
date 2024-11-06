@@ -1,9 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://brj6q4ppv57ga"]
+[gd_scene load_steps=6 format=3 uid="uid://brj6q4ppv57ga"]
 
 [ext_resource type="Script" path="res://Scripts/settings_menu.gd" id="1_q1pol"]
 [ext_resource type="Theme" uid="uid://scev88nm8kc5" path="res://FontTheme.tres" id="2_0d45o"]
+[ext_resource type="AudioStream" uid="uid://bbddnybojvakd" path="res://Audio/SFX/MenuSelectFX.wav" id="3_8csfm"]
+[ext_resource type="AudioStream" uid="uid://br5u2plw0pw5a" path="res://Audio/Music/MoSzat-combat.wav" id="3_jlpif"]
 
-[sub_resource type="AudioStreamMP3" id="AudioStreamMP3_u6ruf"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2sgef"]
 
 [node name="SettingsMenu" type="Control"]
 layout_mode = 3
@@ -33,19 +35,111 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_0d45o")
 
+[node name="VolumeSliderMain" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Volume"
+focus_neighbor_top = NodePath("../BackButton")
+max_value = 1.0
+step = 0.001
+value = 0.5
+
+[node name="MuteButtonMain" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Mute All"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VolumeSliderSFX" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Volume"
+max_value = 1.0
+step = 0.001
+value = 0.5
+
+[node name="MuteButtonSFX" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Mute SFX"
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VolumeSliderMusic" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Volume"
+max_value = 1.0
+step = 0.001
+value = 0.5
+
+[node name="MuteButtonMusic" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Mute Music"
+
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2sgef")
+
+[node name="OptionButtonResolution" type="OptionButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "1920*1080"
+popup/item_1/text = "1600*900"
+popup/item_1/id = 1
+popup/item_2/text = "1280*720"
+popup/item_2/id = 2
+
+[node name="Panel3" type="Panel" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2sgef")
+
+[node name="CheckButtonFullscreen" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Fullscreen"
+
+[node name="Panel2" type="Panel" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2sgef")
+
+[node name="HSeparator4" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
 [node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../VolumeSliderMain")
+theme_override_font_sizes/font_size = 32
 text = "Back"
 
-[node name="VolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
+[node name="AudioStreamPlayerSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8csfm")
+bus = &"SFX"
 
-[node name="MuteButton" type="CheckButton" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
+[node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jlpif")
+bus = &"Music"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamMP3_u6ruf")
-
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/VolumeSliderMain" to="." method="_SFX_player_Item_focus_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeSliderMain" to="." method="_on_volume_slider_main_value_changed"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/MuteButtonMain" to="." method="_SFX_player_Item_focus_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/MuteButtonMain" to="." method="_on_mute_button_main_toggled"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/VolumeSliderSFX" to="." method="_SFX_player_Item_focus_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeSliderSFX" to="." method="_on_volume_slider_sfx_value_changed"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/MuteButtonSFX" to="." method="_SFX_player_Item_focus_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/MuteButtonSFX" to="." method="_on_mute_button_sfx_toggled"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/VolumeSliderMusic" to="." method="_SFX_player_Item_focus_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeSliderMusic" to="." method="_on_volume_slider_music_value_changed"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/MuteButtonMusic" to="." method="_SFX_player_Item_focus_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/MuteButtonMusic" to="." method="_on_mute_button_music_toggled"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/OptionButtonResolution" to="." method="_SFX_player_Item_focus_changed"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/OptionButtonResolution" to="." method="_on_option_button_resolution_item_selected"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/CheckButtonFullscreen" to="." method="_SFX_player_Item_focus_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/CheckButtonFullscreen" to="." method="_on_check_button_fullscreen_toggled"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/BackButton" to="." method="_SFX_player_Item_focus_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
-[connection signal="toggled" from="MarginContainer/VBoxContainer/MuteButton" to="." method="_on_mute_button_toggled"]
