@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmicnpdg32sat"]
+
+[ext_resource type="FontFile" uid="uid://b7vpwv0xifrok" path="res://ShadowFont.ttf" id="1_5yo73"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_51rs6"]
+
+[node name="Node" type="Node"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 188.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_5yo73")
+text = "Hello World
+"
+label_settings = SubResource("LabelSettings_51rs6")
