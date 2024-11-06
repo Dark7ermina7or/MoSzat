@@ -1,0 +1,41 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://scev88nm8kc5"]
+
+[ext_resource type="FontFile" uid="uid://b7vpwv0xifrok" path="res://ShadowFont.ttf" id="1_2qo15"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tacos"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4jbwf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_novls"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f7663"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o1cun"]
+
+[resource]
+default_font = ExtResource("1_2qo15")
+default_font_size = 28
+Button/colors/font_color = Color(0.729412, 0.12549, 0.145098, 1)
+Button/colors/font_disabled_color = Color(0.196078, 0.196078, 0.196078, 1)
+Button/colors/font_focus_color = Color(0.87604, 0.178478, 0.193798, 1)
+Button/colors/font_hover_color = Color(0.87451, 0.180392, 0.192157, 1)
+Button/colors/font_hover_pressed_color = Color(0.87451, 0.180392, 0.192157, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0.729412, 0.12549, 0.145098, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(0.87451, 0.180392, 0.192157, 1)
+Button/colors/icon_hover_color = Color(0.87451, 0.180392, 0.192157, 1)
+Button/colors/icon_hover_pressed_color = Color(0.87451, 0.180392, 0.192157, 1)
+Button/colors/icon_normal_color = Color(0.729412, 0.12549, 0.145098, 1)
+Button/colors/icon_pressed_color = Color(0.87451, 0.180392, 0.192157, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 32
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("1_2qo15")
+Button/styles/disabled = SubResource("StyleBoxTexture_tacos")
+Button/styles/focus = SubResource("StyleBoxTexture_4jbwf")
+Button/styles/hover = SubResource("StyleBoxTexture_novls")
+Button/styles/normal = SubResource("StyleBoxTexture_f7663")
+Button/styles/pressed = SubResource("StyleBoxTexture_o1cun")

@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://dy0if2xc3iyia"]
+
+[ext_resource type="Script" path="res://Scripts/menu.gd" id="1_eahab"]
+[ext_resource type="Theme" uid="uid://scev88nm8kc5" path="res://FontTheme.tres" id="1_tsum5"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_tsum5")
+script = ExtResource("1_eahab")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -150.0
+offset_right = 184.0
+offset_bottom = -42.0
+grow_vertical = 0
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Exit")
+text = "Start"
+
+[node name="Bestiary" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Bestiary"
+
+[node name="Options" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Exit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Start")
+text = "Exit"
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Bestiary" to="." method="_on_bestiary_pressed"]
+[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
