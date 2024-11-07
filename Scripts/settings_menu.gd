@@ -1,5 +1,7 @@
 extends Control
 
+#Audio sliders
+#https://www.youtube.com/watch?v=aFkRmtGiZCw
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,14 +42,14 @@ func _on_volume_slider_main_value_changed(value: float) -> void:
 
 
 func _on_mute_button_main_toggled(toggled_on: bool) -> void:
-	AudioServer.set_bus_mute(0,!toggled_on)
+	AudioServer.set_bus_mute(0,toggled_on)
 
 func _on_volume_slider_sfx_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(1,linear_to_db(value))
 
 
 func _on_mute_button_sfx_toggled(toggled_on: bool) -> void:
-	AudioServer.set_bus_mute(1,!toggled_on)
+	AudioServer.set_bus_mute(1,toggled_on)
 
 
 func _on_volume_slider_music_value_changed(value: float) -> void:
@@ -55,7 +57,7 @@ func _on_volume_slider_music_value_changed(value: float) -> void:
 
 
 func _on_mute_button_music_toggled(toggled_on: bool) -> void:
-	AudioServer.set_bus_mute(2,!toggled_on)
+	AudioServer.set_bus_mute(2,toggled_on)
 
 
 func _on_option_button_resolution_item_selected(index: int) -> void:
