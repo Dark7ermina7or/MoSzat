@@ -81,4 +81,5 @@ func _on_check_button_fullscreen_toggled(toggled_on: bool) -> void:
 
 
 func _SFX_player_Item_focus_changed() -> void:
-	$AudioStreamPlayerSFX.play()
+	#$AudioStreamPlayerSFX.play()
+	return
