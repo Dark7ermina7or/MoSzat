@@ -1,5 +1,7 @@
 extends Control
 
+const music = preload("res://Audio/Music/MoSzat-combat.wav")
+
 #
 # https://www.youtube.com/watch?v=Mx3iyz8AUAE
 #
@@ -7,9 +9,7 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$MarginContainer/VBoxContainer/Start.grab_focus()
-	AudioStreamPlayerGlobal.play_music_level()
-	
-	
+	AudioStreamPlayerGlobal.play_music(music)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
