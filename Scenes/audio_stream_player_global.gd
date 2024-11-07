@@ -1,5 +1,6 @@
 extends AudioStreamPlayer
 
+#https://www.youtube.com/watch?v=lILnUD3xph8
 #const lvl_music = preload("res://Audio/Music/MoSzat-combat.wav")
 
 func play_music(music: AudioStream, volume = 0.0):
