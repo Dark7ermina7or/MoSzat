@@ -48,7 +48,8 @@ func _process(delta: float) -> void:
 
 
 func _on_back_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/menu.tscn")
+	#get_tree().change_scene_to_file("res://Scenes/menu.tscn")
+	SceneTransition.scene_transition("res://Scenes/menu.tscn")
 
 
 func _on_volume_slider_main_value_changed(value: float) -> void:
