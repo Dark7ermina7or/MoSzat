@@ -35,7 +35,7 @@ theme = ExtResource("2_0d45o")
 
 [node name="VolumeSliderMain" type="HSlider" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-tooltip_text = "Volume"
+tooltip_text = "Master Volume"
 focus_neighbor_top = NodePath("../BackButton")
 max_value = 3.0
 step = 0.001
@@ -50,7 +50,7 @@ layout_mode = 2
 
 [node name="VolumeSliderSFX" type="HSlider" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-tooltip_text = "Volume"
+tooltip_text = "SFX Volume"
 max_value = 3.0
 step = 0.001
 value = 0.5
@@ -64,7 +64,7 @@ layout_mode = 2
 
 [node name="VolumeSliderMusic" type="HSlider" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-tooltip_text = "Volume"
+tooltip_text = "Music Volume"
 max_value = 3.0
 step = 0.001
 value = 0.5
@@ -115,14 +115,17 @@ focus_neighbor_bottom = NodePath("../VolumeSliderMain")
 theme_override_font_sizes/font_size = 32
 text = "Back"
 
+[connection signal="drag_ended" from="MarginContainer/VBoxContainer/VolumeSliderMain" to="." method="_on_volume_slider_main_drag_ended"]
 [connection signal="focus_entered" from="MarginContainer/VBoxContainer/VolumeSliderMain" to="." method="_SFX_player_Item_focus_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeSliderMain" to="." method="_on_volume_slider_main_value_changed"]
 [connection signal="focus_entered" from="MarginContainer/VBoxContainer/MuteButtonMain" to="." method="_SFX_player_Item_focus_changed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/MuteButtonMain" to="." method="_on_mute_button_main_toggled"]
+[connection signal="drag_ended" from="MarginContainer/VBoxContainer/VolumeSliderSFX" to="." method="_on_volume_slider_sfx_drag_ended"]
 [connection signal="focus_entered" from="MarginContainer/VBoxContainer/VolumeSliderSFX" to="." method="_SFX_player_Item_focus_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeSliderSFX" to="." method="_on_volume_slider_sfx_value_changed"]
 [connection signal="focus_entered" from="MarginContainer/VBoxContainer/MuteButtonSFX" to="." method="_SFX_player_Item_focus_changed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/MuteButtonSFX" to="." method="_on_mute_button_sfx_toggled"]
+[connection signal="drag_ended" from="MarginContainer/VBoxContainer/VolumeSliderMusic" to="." method="_on_volume_slider_music_drag_ended"]
 [connection signal="focus_entered" from="MarginContainer/VBoxContainer/VolumeSliderMusic" to="." method="_SFX_player_Item_focus_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeSliderMusic" to="." method="_on_volume_slider_music_value_changed"]
 [connection signal="focus_entered" from="MarginContainer/VBoxContainer/MuteButtonMusic" to="." method="_SFX_player_Item_focus_changed"]

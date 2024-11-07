@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+ConfigFileHandler="*res://Scripts/ConfigFileHandler.gd"
 Autoload="*res://Scripts/autoload.gd"
 AudioStreamPlayerGlobal="*res://Scenes/AudioStreamPlayer_Global.tscn"
 
