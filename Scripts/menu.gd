@@ -7,6 +7,8 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$MarginContainer/VBoxContainer/Start.grab_focus()
+	AudioStreamPlayerGlobal.play_music_level()
+	
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
