@@ -1,5 +1,7 @@
 extends Control
 
+
+
 var focusFlag = true
 
 #Audio sliders
@@ -8,19 +10,6 @@ var focusFlag = true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	DisplayServer.window_set_title("MoSzat")
-	#match DisplayServer.window_get_size():
-		#Vector2i(1920,1080):
-			#$MarginContainer/VBoxContainer/OptionButtonResolution.select(0)
-		#Vector2i(1600,900):
-			#$MarginContainer/VBoxContainer/OptionButtonResolution.select(1)
-		#Vector2i(1280,720):
-			#$MarginContainer/VBoxContainer/OptionButtonResolution.select(2)
-	#
-	#match DisplayServer.window_get_mode():
-		#DisplayServer.WINDOW_MODE_FULLSCREEN:
-			#$MarginContainer/VBoxContainer/CheckButtonFullscreen.button_pressed = true
-		#DisplayServer.WINDOW_MODE_WINDOWED:
-			#$MarginContainer/VBoxContainer/CheckButtonFullscreen.button_pressed = false
 	
 	var video_settings = ConfigFileHandler.load_video_settings()
 	var audio_settings = ConfigFileHandler.load_audio_settings()
@@ -42,6 +31,9 @@ func _ready() -> void:
 	$MarginContainer/VBoxContainer/VolumeSliderMusic.value = db_to_linear(audio_settings.music_volume)
 	
 	DisplayServer.window_set_position(Vector2i((DisplayServer.screen_get_size() - DisplayServer.window_get_size()) / 2),0)
+	
+	var shaderMat = $ColorRect_Shader.material as ShaderMaterial
+	shaderMat.set_shader_parameter("resolution", DisplayServer.window_get_size()/2)
 	
 	focusFlag = true
 	$MarginContainer/VBoxContainer/VolumeSliderMain.grab_focus()
@@ -105,6 +97,9 @@ func _on_option_button_resolution_item_selected(index: int) -> void:
 	DisplayServer.window_set_position(Vector2i((DisplayServer.screen_get_size() - DisplayServer.window_get_size()) / 2),0)
 	AudioStreamPlayerGlobal.play_SFX(Preloads.sfx_gui_conf)
 	ConfigFileHandler.save_video_settings("resolution", index)
+	
+	var shaderMat = $ColorRect_Shader.material as ShaderMaterial
+	shaderMat.set_shader_parameter("resolution", DisplayServer.window_get_size()/2)
 
 
 func _on_check_button_fullscreen_toggled(toggled_on: bool) -> void:
@@ -116,6 +111,9 @@ func _on_check_button_fullscreen_toggled(toggled_on: bool) -> void:
 		$MarginContainer/VBoxContainer/OptionButtonResolution.disabled = false
 	#AudioStreamPlayerGlobal.play_SFX(Preloads.sfx_gui_conf)
 	ConfigFileHandler.save_video_settings("fullscreen", toggled_on)
+	
+	var shaderMat = $ColorRect_Shader.material as ShaderMaterial
+	shaderMat.set_shader_parameter("resolution", DisplayServer.window_get_size()/2)
 
 
 

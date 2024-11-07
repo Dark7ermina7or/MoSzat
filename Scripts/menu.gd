@@ -11,6 +11,9 @@ func _ready() -> void:
 	focusFlag = true
 	$MarginContainer/VBoxContainer/Start.grab_focus()
 	AudioStreamPlayerGlobal.play_music(Preloads.music)
+	
+	var shaderMat = $ColorRect_Shader.material as ShaderMaterial
+	shaderMat.set_shader_parameter("resolution", DisplayServer.window_get_size()/2)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -23,7 +26,7 @@ func _process(_delta: float) -> void:
 
 func _on_start_pressed() -> void:
 	AudioStreamPlayerGlobal.play_SFX(Preloads.sfx_gui_conf)
-	get_tree().change_scene_to_file("res://Scenes/a.tscn")
+	SceneTransition.scene_transition("res://Scenes/Game.tscn")
 
 
 func _on_options_pressed() -> void:

@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2d7xcbqo4frd"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_5w3pi"]
+[ext_resource type="Texture2D" uid="uid://dwdm03xv0qt6k" path="res://Sprites/Sheets/Ship_Player.png" id="1_pnqgh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w21s8"]
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 10
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_5w3pi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_pnqgh")
+offset = Vector2(4, 0)
+hframes = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2.5, 2.5)
+shape = SubResource("CircleShape2D_w21s8")
+
+[node name="MuzzleMain" type="Node2D" parent="."]
+visible = false
+position = Vector2(26, 0)
+
+[node name="DEBUGColorRect" type="ColorRect" parent="MuzzleMain"]
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0

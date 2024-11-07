@@ -1,1 +1,1 @@
-# MoSzat
+# Project MoSzat
