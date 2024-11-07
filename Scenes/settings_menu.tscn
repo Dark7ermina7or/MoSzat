@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://brj6q4ppv57ga"]
+[gd_scene load_steps=5 format=3 uid="uid://brj6q4ppv57ga"]
 
 [ext_resource type="Script" path="res://Scripts/settings_menu.gd" id="1_q1pol"]
 [ext_resource type="Theme" uid="uid://scev88nm8kc5" path="res://FontTheme.tres" id="2_0d45o"]
+[ext_resource type="Material" uid="uid://ci8fr3n7t2pef" path="res://Shaders/CRT_Edited.tres" id="3_43sfm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2sgef"]
 
@@ -115,24 +116,43 @@ focus_neighbor_bottom = NodePath("../VolumeSliderMain")
 theme_override_font_sizes/font_size = 32
 text = "Back"
 
+[node name="ColorRect_Shader" type="ColorRect" parent="."]
+material = ExtResource("3_43sfm")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [connection signal="drag_ended" from="MarginContainer/VBoxContainer/VolumeSliderMain" to="." method="_on_volume_slider_main_drag_ended"]
-[connection signal="focus_entered" from="MarginContainer/VBoxContainer/VolumeSliderMain" to="." method="_SFX_player_Item_focus_changed"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/VolumeSliderMain" to="." method="_on_item_focus_entered"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/VolumeSliderMain" to="." method="_on_volume_slider_main_mouse_entered"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeSliderMain" to="." method="_on_volume_slider_main_value_changed"]
-[connection signal="focus_entered" from="MarginContainer/VBoxContainer/MuteButtonMain" to="." method="_SFX_player_Item_focus_changed"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/MuteButtonMain" to="." method="_on_item_focus_entered"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/MuteButtonMain" to="." method="_on_mute_button_main_mouse_entered"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/MuteButtonMain" to="." method="_on_mute_button_main_toggled"]
 [connection signal="drag_ended" from="MarginContainer/VBoxContainer/VolumeSliderSFX" to="." method="_on_volume_slider_sfx_drag_ended"]
-[connection signal="focus_entered" from="MarginContainer/VBoxContainer/VolumeSliderSFX" to="." method="_SFX_player_Item_focus_changed"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/VolumeSliderSFX" to="." method="_on_item_focus_entered"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/VolumeSliderSFX" to="." method="_on_volume_slider_sfx_mouse_entered"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeSliderSFX" to="." method="_on_volume_slider_sfx_value_changed"]
-[connection signal="focus_entered" from="MarginContainer/VBoxContainer/MuteButtonSFX" to="." method="_SFX_player_Item_focus_changed"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/MuteButtonSFX" to="." method="_on_item_focus_entered"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/MuteButtonSFX" to="." method="_on_mute_button_sfx_mouse_entered"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/MuteButtonSFX" to="." method="_on_mute_button_sfx_toggled"]
 [connection signal="drag_ended" from="MarginContainer/VBoxContainer/VolumeSliderMusic" to="." method="_on_volume_slider_music_drag_ended"]
-[connection signal="focus_entered" from="MarginContainer/VBoxContainer/VolumeSliderMusic" to="." method="_SFX_player_Item_focus_changed"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/VolumeSliderMusic" to="." method="_on_item_focus_entered"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/VolumeSliderMusic" to="." method="_on_volume_slider_music_mouse_entered"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeSliderMusic" to="." method="_on_volume_slider_music_value_changed"]
-[connection signal="focus_entered" from="MarginContainer/VBoxContainer/MuteButtonMusic" to="." method="_SFX_player_Item_focus_changed"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/MuteButtonMusic" to="." method="_on_item_focus_entered"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/MuteButtonMusic" to="." method="_on_mute_button_music_mouse_entered"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/MuteButtonMusic" to="." method="_on_mute_button_music_toggled"]
-[connection signal="focus_entered" from="MarginContainer/VBoxContainer/OptionButtonResolution" to="." method="_SFX_player_Item_focus_changed"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/OptionButtonResolution" to="." method="_on_item_focus_entered"]
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/OptionButtonResolution" to="." method="_on_option_button_resolution_item_selected"]
-[connection signal="focus_entered" from="MarginContainer/VBoxContainer/CheckButtonFullscreen" to="." method="_SFX_player_Item_focus_changed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/OptionButtonResolution" to="." method="_on_option_button_resolution_mouse_entered"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/CheckButtonFullscreen" to="." method="_on_item_focus_entered"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/CheckButtonFullscreen" to="." method="_on_check_button_fullscreen_mouse_entered"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/CheckButtonFullscreen" to="." method="_on_check_button_fullscreen_toggled"]
-[connection signal="focus_entered" from="MarginContainer/VBoxContainer/BackButton" to="." method="_SFX_player_Item_focus_changed"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_item_focus_entered"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

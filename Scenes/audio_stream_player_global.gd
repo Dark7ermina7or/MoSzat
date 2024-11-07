@@ -10,13 +10,17 @@ func play_music(music: AudioStream, volume = 0.0):
 	stream = music
 	volume_db = volume
 	play()
+	
+
+func _on_finished() -> void:
+	play()
 
 #func play_music_level():
 	#_play_music(lvl_music) 
 
-func play_SFX(stream: AudioStream, volume = 0.0):
+func play_SFX(sfx: AudioStream, volume = 0.0):
 	var sfx_player = AudioStreamPlayer.new()
-	sfx_player.stream = stream
+	sfx_player.stream = sfx
 	sfx_player.name = "SFX_Player"
 	sfx_player.bus = "SFX"
 	sfx_player.volume_db = volume

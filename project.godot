@@ -21,6 +21,7 @@ ConfigFileHandler="*res://Scripts/ConfigFileHandler.gd"
 Autoload="*res://Scripts/autoload.gd"
 AudioStreamPlayerGlobal="*res://Scenes/AudioStreamPlayer_Global.tscn"
 SceneTransition="*res://Scripts/scene_transition.tscn"
+Preloads="*res://Scripts/preloads.gd"
 
 [display]
 
