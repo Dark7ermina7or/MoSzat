@@ -8,6 +8,7 @@ var focusFlag = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	randomize()
 	focusFlag = true
 	$MarginContainer/VBoxContainer/Start.grab_focus()
 	AudioStreamPlayerGlobal.play_music(Preloads.music)

@@ -21,10 +21,10 @@ scale = Vector2(2.5, 2.5)
 shape = SubResource("CircleShape2D_w21s8")
 
 [node name="MuzzleMain" type="Node2D" parent="."]
-visible = false
 position = Vector2(26, 0)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleMain"]
+visible = false
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 2.0

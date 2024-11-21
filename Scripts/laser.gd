@@ -12,6 +12,12 @@ func _process(delta: float) -> void:
 	global_position += movement_vector * speed * delta
 
 func _ready() -> void:
+	var r = bool(randi() % 2)
+	if r:
+		AudioStreamPlayerGlobal.play_SFX(Preloads.sfx_laser_shot)
+	else:
+		AudioStreamPlayerGlobal.play_SFX(Preloads.sfx_laser_shot_alt)
+	
 	$AnimatedSprite2D.play("loop")
 	movement_vector = (get_global_mouse_position() - global_position).normalized()
 	rotation = movement_vector.angle()
