@@ -1,0 +1,2 @@
+class_name Enemy_Support
+extends Enemy_Base
