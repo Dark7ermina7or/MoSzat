@@ -1,33 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6h0mwr22uxit"]
+[gd_scene load_steps=5 format=3 uid="uid://b220owu4fv8ix"]
 
-[ext_resource type="Texture2D" uid="uid://di71f3oxeh7wm" path="res://Sprites/Sheets/Ship_Support.png" id="1_opj8b"]
-[ext_resource type="Script" path="res://Scripts/Game/enemy_support.gd" id="1_puboy"]
+[ext_resource type="Script" path="res://Scripts/Game/enemy_bulwark.gd" id="1_e3qtu"]
+[ext_resource type="Texture2D" uid="uid://caclei7slj4ea" path="res://Sprites/Sheets/Ship_Bulwark.png" id="2_4s43b"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u2ge1"]
 radius = 17.0
-height = 56.0
+height = 104.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hbnx5"]
-size = Vector2(23, 12)
+size = Vector2(14.5, 32)
 
-[node name="EnemySupport" type="Area2D"]
+[node name="EnemyBulwark" type="Area2D"]
 process_mode = 3
-script = ExtResource("1_puboy")
+script = ExtResource("1_e3qtu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_opj8b")
+texture = ExtResource("2_4s43b")
 hframes = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-12, 0)
+position = Vector2(-6, 0)
 shape = SubResource("CapsuleShape2D_u2ge1")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(16.5, 0)
+position = Vector2(-30.75, 0)
 shape = SubResource("RectangleShape2D_hbnx5")
 
 [node name="MuzzleMain" type="Node2D" parent="."]
-position = Vector2(33, 0)
+position = Vector2(-4, 0)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleMain"]
 offset_left = -2.0
@@ -36,7 +36,7 @@ offset_right = 2.0
 offset_bottom = 2.0
 
 [node name="MuzzleLeft" type="Node2D" parent="."]
-position = Vector2(-12, -16)
+position = Vector2(17, -23)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleLeft"]
 offset_left = -2.0
@@ -44,10 +44,28 @@ offset_top = -2.0
 offset_right = 2.0
 offset_bottom = 2.0
 
+[node name="MuzzleLeft2" type="Node2D" parent="."]
+position = Vector2(5, -45)
+
+[node name="DEBUGColorRect" type="ColorRect" parent="MuzzleLeft2"]
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+
 [node name="MuzzleRight" type="Node2D" parent="."]
-position = Vector2(-12, 16)
+position = Vector2(17, 23)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleRight"]
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+
+[node name="MuzzleRight2" type="Node2D" parent="."]
+position = Vector2(5, 45)
+
+[node name="DEBUGColorRect" type="ColorRect" parent="MuzzleRight2"]
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 2.0

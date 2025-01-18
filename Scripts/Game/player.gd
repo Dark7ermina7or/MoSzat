@@ -6,7 +6,7 @@ extends CharacterBody2D
 var laser_scene = Preloads.scene_laser
 var MuzzleMain_defRot := Vector2(26,0)
 
-signal laser_shot(laser)
+signal player_laser_shot(laser)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("action_shoot"):
@@ -23,12 +23,8 @@ func _physics_process(delta: float) -> void:
 
 func _ready() -> void:
 	MuzzleMain_defRot = $MuzzleMain.position
-
-func _ontt() -> void:
-	var ll = laser_scene.instantiate()
-	ll.global_position = Vector2(randi_range(0,500),randi_range(0,500))
-	ll.emit_signal("shotByAI")
-	emit_signal("laser_shot", ll)
+	#print("asd")
+	add_to_group("Player")
 
 func get_rotated_point(frame: int, initial_offset: Vector2) -> Vector2:
 	# Calculate the angle for the given frame (in degrees)
@@ -57,4 +53,4 @@ func shoot_laser():
 	var l = laser_scene.instantiate()
 	l.global_position = $MuzzleMain.global_position
 	l.emit_signal("shotByPlayer")
-	emit_signal("laser_shot", l)
+	emit_signal("player_laser_shot", l)

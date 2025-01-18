@@ -1,33 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6h0mwr22uxit"]
+[gd_scene load_steps=5 format=3 uid="uid://owvpn1g18mh6"]
 
-[ext_resource type="Texture2D" uid="uid://di71f3oxeh7wm" path="res://Sprites/Sheets/Ship_Support.png" id="1_opj8b"]
-[ext_resource type="Script" path="res://Scripts/Game/enemy_support.gd" id="1_puboy"]
+[ext_resource type="Texture2D" uid="uid://8bgkfaopnf6s" path="res://Sprites/Sheets/Ship_Lancer.png" id="1_8emfx"]
+[ext_resource type="Script" path="res://Scripts/Game/enemy_lancer.gd" id="1_rkfx8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u2ge1"]
-radius = 17.0
+radius = 22.0
 height = 56.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hbnx5"]
-size = Vector2(23, 12)
+size = Vector2(43, 40)
 
-[node name="EnemySupport" type="Area2D"]
+[node name="EnemyLancer" type="Area2D"]
 process_mode = 3
-script = ExtResource("1_puboy")
+script = ExtResource("1_rkfx8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_opj8b")
+texture = ExtResource("1_8emfx")
 hframes = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-12, 0)
+position = Vector2(-8, 0)
 shape = SubResource("CapsuleShape2D_u2ge1")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(16.5, 0)
+position = Vector2(30.5, 0)
 shape = SubResource("RectangleShape2D_hbnx5")
 
 [node name="MuzzleMain" type="Node2D" parent="."]
-position = Vector2(33, 0)
+position = Vector2(15, 0)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleMain"]
 offset_left = -2.0
@@ -36,7 +36,7 @@ offset_right = 2.0
 offset_bottom = 2.0
 
 [node name="MuzzleLeft" type="Node2D" parent="."]
-position = Vector2(-12, -16)
+position = Vector2(51, -15)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleLeft"]
 offset_left = -2.0
@@ -45,7 +45,7 @@ offset_right = 2.0
 offset_bottom = 2.0
 
 [node name="MuzzleRight" type="Node2D" parent="."]
-position = Vector2(-12, 16)
+position = Vector2(51, 15)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleRight"]
 offset_left = -2.0

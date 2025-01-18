@@ -244,6 +244,11 @@ shape = SubResource("SegmentShape2D_mynt6")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(-100, -50, 200, 100)
 
+[node name="SeekerTime" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="seeker" from="." to="." method="_on_seeker"]
 [connection signal="shotByAI" from="." to="." method="_on_shot_by_ai"]
 [connection signal="shotByPlayer" from="." to="." method="_on_shot_by_player"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="SeekerTime" to="." method="_on_seeker_time_timeout"]

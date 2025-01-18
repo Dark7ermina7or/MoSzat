@@ -1,11 +1,13 @@
-class_name Enemy_Support
+class_name Enemy_Bulwark
 extends Enemy_Base
 
 var rng = RandomNumberGenerator.new()
 
-var MuzzleMain_defRot := Vector2(33,0)
-var MuzzleLeft_defRot := Vector2(-12,-16)
-var MuzzleRight_defRot := Vector2(-12,16)
+var MuzzleMain_defRot := Vector2(-4,0)
+var MuzzleLeft_defRot := Vector2(17,-23)
+var MuzzleLeft2_defRot := Vector2(5,-45)
+var MuzzleRight_defRot := Vector2(17,23)
+var MuzzleRight2_defRot := Vector2(5,45)
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	$".".queue_free()
@@ -14,6 +16,7 @@ func shoot_main_laser():
 	var l = laser_scene.instantiate()
 	l.global_position = $MuzzleMain.global_position
 	l.emit_signal("shotByAI")
+	l.emit_signal("seeker")
 	emit_signal("enemy_laser_shot", l, $".".movement_vector)
 	
 
@@ -21,14 +24,26 @@ func shoot_side_laser():
 	var l = laser_scene.instantiate()
 	l.global_position = $MuzzleRight.global_position
 	l.emit_signal("shotByAI")
-	l.emit_signal("seeker")
+	#l.emit_signal("seeker")
 	emit_signal("enemy_laser_shot", l, $".".movement_vector)
 	
 	var ll = laser_scene.instantiate()
 	ll.global_position = $MuzzleLeft.global_position
 	ll.emit_signal("shotByAI")
-	ll.emit_signal("seeker")
+	#ll.emit_signal("seeker")
 	emit_signal("enemy_laser_shot", ll, $".".movement_vector)
+	
+	var lll = laser_scene.instantiate()
+	lll.global_position = $MuzzleRight2.global_position
+	lll.emit_signal("shotByAI")
+	#lll.emit_signal("seeker")
+	emit_signal("enemy_laser_shot", lll, $".".movement_vector)
+	
+	var llll = laser_scene.instantiate()
+	llll.global_position = $MuzzleLeft2.global_position
+	llll.emit_signal("shotByAI")
+	#llll.emit_signal("seeker")
+	emit_signal("enemy_laser_shot", llll, $".".movement_vector)
 	
 func _ready() -> void:
 	#Connect the enemy_base signal "enemy_laser_shot" to the parent's (Game) script's function (_on_enemy_laser_shot)
@@ -42,7 +57,7 @@ func _ready() -> void:
 	movement_vector = (get_node("/root/Game/Player").global_position - global_position).normalized()
 	
 	speed = 100
-	scale = Vector2(0.5, 0.5)
+	scale = Vector2(0.4, 0.4)
 	
 	$Shoot.wait_time = rng.randf_range(1,3)
 	$Shoot.start()
@@ -54,6 +69,8 @@ func _process(delta: float) -> void:
 	$MuzzleMain.position = get_rotated_point($Sprite2D.frame, MuzzleMain_defRot)
 	$MuzzleLeft.position = get_rotated_point($Sprite2D.frame, MuzzleLeft_defRot)
 	$MuzzleRight.position = get_rotated_point($Sprite2D.frame, MuzzleRight_defRot)
+	$MuzzleRight2.position = get_rotated_point($Sprite2D.frame, MuzzleRight2_defRot)
+	$MuzzleLeft2.position = get_rotated_point($Sprite2D.frame, MuzzleLeft2_defRot)
 
 
 func get_rotated_point(frame: int, initial_offset: Vector2) -> Vector2:

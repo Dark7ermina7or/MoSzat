@@ -1,11 +1,11 @@
-class_name Enemy_Support
+class_name Enemy_Interceptor
 extends Enemy_Base
 
 var rng = RandomNumberGenerator.new()
 
-var MuzzleMain_defRot := Vector2(33,0)
-var MuzzleLeft_defRot := Vector2(-12,-16)
-var MuzzleRight_defRot := Vector2(-12,16)
+var MuzzleMain_defRot := Vector2(53,0)
+var MuzzleLeft_defRot := Vector2(-14,-27)
+var MuzzleRight_defRot := Vector2(-14,27)
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	$".".queue_free()
@@ -42,7 +42,7 @@ func _ready() -> void:
 	movement_vector = (get_node("/root/Game/Player").global_position - global_position).normalized()
 	
 	speed = 100
-	scale = Vector2(0.5, 0.5)
+	scale = Vector2(0.35, 0.35)
 	
 	$Shoot.wait_time = rng.randf_range(1,3)
 	$Shoot.start()

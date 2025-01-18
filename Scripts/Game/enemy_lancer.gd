@@ -1,11 +1,11 @@
-class_name Enemy_Support
+class_name Enemy_Lancer
 extends Enemy_Base
 
 var rng = RandomNumberGenerator.new()
 
-var MuzzleMain_defRot := Vector2(33,0)
-var MuzzleLeft_defRot := Vector2(-12,-16)
-var MuzzleRight_defRot := Vector2(-12,16)
+var MuzzleMain_defRot := Vector2(15,0)
+var MuzzleLeft_defRot := Vector2(51,-15)
+var MuzzleRight_defRot := Vector2(51,15)
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	$".".queue_free()
