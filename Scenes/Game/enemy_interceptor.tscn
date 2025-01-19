@@ -5,6 +5,10 @@
 
 [node name="EnemyInterceptor" type="Area2D"]
 process_mode = 3
+collision_layer = 4
+collision_mask = 10
+input_pickable = false
+priority = 50
 script = ExtResource("1_ltiwj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -18,6 +22,7 @@ polygon = PackedVector2Array(51, 0, -31, 40, -31, -40)
 position = Vector2(53, 0)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleMain"]
+visible = false
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 2.0
@@ -27,6 +32,7 @@ offset_bottom = 2.0
 position = Vector2(-14, -27)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleLeft"]
+visible = false
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 2.0
@@ -36,6 +42,7 @@ offset_bottom = 2.0
 position = Vector2(-14, 27)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleRight"]
+visible = false
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 2.0
@@ -48,6 +55,7 @@ scale = Vector2(10, 8.116)
 
 [node name="ShootAlt" type="Timer" parent="."]
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="timeout" from="Shoot" to="." method="_on_shoot_timeout"]
 [connection signal="timeout" from="ShootAlt" to="." method="_on_shoot_alt_timeout"]

@@ -226,7 +226,8 @@ b = Vector2(-5, 0)
 
 [node name="Laser" type="Area2D"]
 collision_layer = 8
-collision_mask = 9
+collision_mask = 15
+input_pickable = false
 script = ExtResource("1_ir5v0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -247,6 +248,7 @@ rect = Rect2(-100, -50, 200, 100)
 [node name="SeekerTime" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="seeker" from="." to="." method="_on_seeker"]
 [connection signal="shotByAI" from="." to="." method="_on_shot_by_ai"]
 [connection signal="shotByPlayer" from="." to="." method="_on_shot_by_player"]

@@ -7,6 +7,9 @@ var MuzzleMain_defRot := Vector2(15,0)
 var MuzzleLeft_defRot := Vector2(51,-15)
 var MuzzleRight_defRot := Vector2(51,15)
 
+var CollisionShape_defRot := Vector2(-8, 0)
+var CollisionShape2_defRot := Vector2(30, 0)
+
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	$".".queue_free()
 
@@ -41,6 +44,8 @@ func _ready() -> void:
 	
 	movement_vector = (get_node("/root/Game/Player").global_position - global_position).normalized()
 	
+	health = 1
+	shield = 0
 	speed = 100
 	scale = Vector2(0.5, 0.5)
 	
@@ -55,18 +60,10 @@ func _process(delta: float) -> void:
 	$MuzzleLeft.position = get_rotated_point($Sprite2D.frame, MuzzleLeft_defRot)
 	$MuzzleRight.position = get_rotated_point($Sprite2D.frame, MuzzleRight_defRot)
 
-
-func get_rotated_point(frame: int, initial_offset: Vector2) -> Vector2:
-	# Calculate the angle for the given frame (in degrees)
-	var angle_deg = (frame % $Sprite2D.hframes) * (360.0 / $Sprite2D.hframes)
-	# Convert angle to radians
-	var angle_rad = deg_to_rad(angle_deg)
-	# Rotate the initial offset by the calculated angle
-	var rotated_x = initial_offset.x * cos(angle_rad) - initial_offset.y * sin(angle_rad)
-	var rotated_y = initial_offset.x * sin(angle_rad) + initial_offset.y * cos(angle_rad)
-	# Return the new rotated position relative to the ship's pivot
-	return Vector2(rotated_x, rotated_y)
-
+	$CollisionShape2D.position = get_rotated_point($Sprite2D.frame, CollisionShape_defRot)
+	$CollisionShape2D.rotation = movement_vector.angle()
+	$CollisionShape2D2.position = get_rotated_point($Sprite2D.frame, CollisionShape2_defRot)
+	$CollisionShape2D2.rotation = movement_vector.angle()
 
 func _on_shoot_timeout() -> void:
 	shoot_main_laser()
@@ -80,3 +77,14 @@ func _on_shoot_alt_timeout() -> void:
 	
 	$ShootAlt.wait_time = rng.randf_range(3,5)
 	$ShootAlt.start()
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area is Laser:
+		if !area.friendly:
+			pass
+		else:
+			take_damage()
+			area.queue_free()
+	else:
+		take_damage()

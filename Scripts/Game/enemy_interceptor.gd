@@ -7,6 +7,8 @@ var MuzzleMain_defRot := Vector2(53,0)
 var MuzzleLeft_defRot := Vector2(-14,-27)
 var MuzzleRight_defRot := Vector2(-14,27)
 
+var CollisionShape_defRot := Vector2(0, 0)
+
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	$".".queue_free()
 
@@ -35,13 +37,11 @@ func _ready() -> void:
 	var p = get_parent()
 	self.enemy_laser_shot.connect(p._on_enemy_laser_shot)
 	
-	MuzzleMain_defRot = $MuzzleMain.position
-	MuzzleLeft_defRot = $MuzzleLeft.position
-	MuzzleRight_defRot = $MuzzleRight.position
-	
 	movement_vector = (get_node("/root/Game/Player").global_position - global_position).normalized()
 	
-	speed = 100
+	health = 1
+	shield = 0
+	speed = 150
 	scale = Vector2(0.35, 0.35)
 	
 	$Shoot.wait_time = rng.randf_range(1,3)
@@ -55,18 +55,9 @@ func _process(delta: float) -> void:
 	$MuzzleLeft.position = get_rotated_point($Sprite2D.frame, MuzzleLeft_defRot)
 	$MuzzleRight.position = get_rotated_point($Sprite2D.frame, MuzzleRight_defRot)
 
-
-func get_rotated_point(frame: int, initial_offset: Vector2) -> Vector2:
-	# Calculate the angle for the given frame (in degrees)
-	var angle_deg = (frame % $Sprite2D.hframes) * (360.0 / $Sprite2D.hframes)
-	# Convert angle to radians
-	var angle_rad = deg_to_rad(angle_deg)
-	# Rotate the initial offset by the calculated angle
-	var rotated_x = initial_offset.x * cos(angle_rad) - initial_offset.y * sin(angle_rad)
-	var rotated_y = initial_offset.x * sin(angle_rad) + initial_offset.y * cos(angle_rad)
-	# Return the new rotated position relative to the ship's pivot
-	return Vector2(rotated_x, rotated_y)
-
+	#$CollisionPolygon2D.position = get_rotated_point($Sprite2D.frame, CollisionShape_defRot)
+	#is 0,0 so not needed
+	$CollisionPolygon2D.rotation = movement_vector.angle()
 
 func _on_shoot_timeout() -> void:
 	shoot_main_laser()
@@ -80,3 +71,14 @@ func _on_shoot_alt_timeout() -> void:
 	
 	$ShootAlt.wait_time = rng.randf_range(3,5)
 	$ShootAlt.start()
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area is Laser:
+		if !area.friendly:
+			pass
+		else:
+			take_damage()
+			area.queue_free()
+	else:
+		take_damage()

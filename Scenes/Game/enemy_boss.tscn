@@ -3,12 +3,15 @@
 [ext_resource type="Script" path="res://Scripts/Game/enemy_boss.gd" id="1_pipd7"]
 [ext_resource type="Texture2D" uid="uid://ddyns83robm4p" path="res://Sprites/Sheets/Ship_Boss.png" id="2_nw1sq"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u2ge1"]
-radius = 42.0
-height = 94.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_il4lb"]
+radius = 50.04
 
 [node name="EnemyBoss" type="Area2D"]
 process_mode = 3
+collision_layer = 4
+collision_mask = 10
+input_pickable = false
+priority = 50
 script = ExtResource("1_pipd7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -16,12 +19,13 @@ texture = ExtResource("2_nw1sq")
 hframes = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_u2ge1")
+shape = SubResource("CircleShape2D_il4lb")
 
 [node name="MuzzleMain" type="Node2D" parent="."]
 position = Vector2(43, 0)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleMain"]
+visible = false
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 2.0
@@ -31,6 +35,7 @@ offset_bottom = 2.0
 position = Vector2(44, -27)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleLeft"]
+visible = false
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 2.0
@@ -40,6 +45,7 @@ offset_bottom = 2.0
 position = Vector2(16, -33)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleSideL1"]
+visible = false
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 2.0
@@ -49,6 +55,7 @@ offset_bottom = 2.0
 position = Vector2(0, -33)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleSideL2"]
+visible = false
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 2.0
@@ -58,6 +65,7 @@ offset_bottom = 2.0
 position = Vector2(-16, -33)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleSideL3"]
+visible = false
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 2.0
@@ -67,6 +75,7 @@ offset_bottom = 2.0
 position = Vector2(16, 33)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleSideR1"]
+visible = false
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 2.0
@@ -76,6 +85,7 @@ offset_bottom = 2.0
 position = Vector2(0, 33)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleSideR2"]
+visible = false
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 2.0
@@ -85,6 +95,7 @@ offset_bottom = 2.0
 position = Vector2(-16, 33)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleSideR3"]
+visible = false
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 2.0
@@ -94,6 +105,7 @@ offset_bottom = 2.0
 position = Vector2(44, 27)
 
 [node name="DEBUGColorRect" type="ColorRect" parent="MuzzleRight"]
+visible = false
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 2.0
@@ -106,6 +118,7 @@ scale = Vector2(10, 8.116)
 
 [node name="ShootAlt" type="Timer" parent="."]
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="timeout" from="Shoot" to="." method="_on_shoot_timeout"]
 [connection signal="timeout" from="ShootAlt" to="." method="_on_shoot_alt_timeout"]

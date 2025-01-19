@@ -2,6 +2,7 @@ extends Node
 
 var rng = RandomNumberGenerator.new()
 var playerSpawnDistanceSafety = 200
+@export var canSpawn = true
 
 var support = Preloads.enemy_support
 var lancer = Preloads.enemy_lancer
@@ -36,15 +37,16 @@ func pickLocation():
 		return Vector2(rng.randi_range(0-50,1280+50),720+50)
 
 func spawnEnemy(enemy: Variant):
-	var x = enemy.instantiate()
-	
-	var doWhile = true
-	while doWhile:
-		x.global_position = pickLocation()
-		if x.global_position.distance_to($"../Player".global_position) > playerSpawnDistanceSafety:
-			doWhile = false
-	
-	emit_signal("enemySpawned", x)
+	if canSpawn:
+		var x = enemy.instantiate()
+		
+		var doWhile = true
+		while doWhile:
+			x.global_position = pickLocation()
+			if x.global_position.distance_to($"../Player".global_position) > playerSpawnDistanceSafety:
+				doWhile = false
+		
+		emit_signal("enemySpawned", x)
 
 
 func _on_enemy_spawn_timer_timeout() -> void:

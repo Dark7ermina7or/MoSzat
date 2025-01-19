@@ -38,6 +38,8 @@ func _process(delta: float) -> void:
 	previous_position = global_position
 
 func _ready() -> void:
+	add_to_group("Projectile")
+	
 	var r = bool(randi() % 2)
 	if r:
 		AudioStreamPlayerGlobal.play_SFX(Preloads.sfx_laser_shot)
@@ -60,13 +62,15 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 func _on_shot_by_player() -> void:
 	friendly = true
-	#self.set_collision_mask_value(2, false)
-	#self.set_collision_mask_value(3, true)
+	self.set_collision_mask_value(2, false)#player
+	self.set_collision_mask_value(3, true)#enemies
+	self.set_collision_mask_value(4, false)#lasers
 
 func _on_shot_by_ai() -> void:
 	friendly = false
-	#self.set_collision_mask_value(2, true)
-	#self.set_collision_mask_value(3, true)
+	self.set_collision_mask_value(2, true)#player
+	self.set_collision_mask_value(3, false)#enemies
+	self.set_collision_mask_value(4, false)#lasers
 
 
 func _on_seeker_time_timeout() -> void:
@@ -75,3 +79,13 @@ func _on_seeker_time_timeout() -> void:
 
 func _on_seeker() -> void:
 	isseeker = true
+
+
+func  _on_area_entered(area: Area2D) -> void:
+	#if area is Enemy_Base:
+	#	var e = explosion_scene.instantiate()
+	#	e.global_position = area.global_position
+	#	get_parent().add_child(e)
+	#	area.queue_free()
+	#$".".queue_free()
+	pass
