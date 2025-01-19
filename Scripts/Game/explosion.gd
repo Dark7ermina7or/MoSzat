@@ -7,6 +7,8 @@ func _ready() -> void:
 	#$pre.play("pre")
 	#$post.visible = false
 	
+	AudioStreamPlayerGlobal.play_SFX(Preloads.sfx_player_death)
+	
 	$pre.visible = false
 	$post.visible = true
 	$post.play("post")

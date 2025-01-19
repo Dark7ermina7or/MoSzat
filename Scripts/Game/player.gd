@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var acceleration := 150
 @export var max_speed := 500
 @export var canShoot := true
+@export var score = 0
 
 var explosion_scene = Preloads.explosion
 var laser_scene = Preloads.scene_laser
@@ -114,6 +115,9 @@ func death():
 	$Sprite2D.visible = false
 	canShoot = false
 	
+	if score > get_parent().highscore:
+		ConfigFileHandler.save_score_settings("score", score)
+	
 	SceneTransition.scene_transition("res://Scenes/Menu/menu.tscn")
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
@@ -128,5 +132,5 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_area_2d_body_entered(_body: Node2D) -> void:
 	pass

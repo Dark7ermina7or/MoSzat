@@ -1,6 +1,7 @@
 extends Control
 
 var focusFlag = true
+var highscore = ConfigFileHandler.load_score_settings()
 
 #
 # https://www.youtube.com/watch?v=Mx3iyz8AUAE
@@ -15,6 +16,8 @@ func _ready() -> void:
 	
 	var shaderMat = $ColorRect_Shader.material as ShaderMaterial
 	shaderMat.set_shader_parameter("resolution", DisplayServer.window_get_size()/2)
+	
+	$MarginContainer/VBoxContainer2/Score.text = "High Score: " + str(highscore)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

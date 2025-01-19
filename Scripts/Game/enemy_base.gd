@@ -70,4 +70,5 @@ func take_damage():
 	
 	if health <= 0:
 		spawn_explosion()
+		get_parent().player.score += 1
 		queue_free()

@@ -5,6 +5,8 @@ extends Node2D
 @onready var enemies = $Enemies
 @onready var player = $Player
 
+var highscore = ConfigFileHandler.load_score_settings()
+
 func _on_player_laser_shot(laser: Variant) -> void:
 	laser.set_collision_layer(0x0)
 	laser.set_collision_layer_value(4, true)
