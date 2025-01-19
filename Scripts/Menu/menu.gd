@@ -41,7 +41,7 @@ func _on_options_pressed() -> void:
 
 func _on_bestiary_pressed() -> void:
 	AudioStreamPlayerGlobal.play_SFX(Preloads.sfx_gui_conf)
-	pass # Replace with function body.
+	SceneTransition.scene_transition("res://Scenes/Menu/bestiary.tscn")
 
 
 func _on_exit_pressed() -> void:
