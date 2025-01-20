@@ -1,9 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://drsph3xdsbg4"]
+[gd_scene load_steps=10 format=3 uid="uid://drsph3xdsbg4"]
 
 [ext_resource type="Script" path="res://Scripts/Game/game.gd" id="1_nkw48"]
 [ext_resource type="PackedScene" uid="uid://b2d7xcbqo4frd" path="res://Scenes/Game/player.tscn" id="1_ttd3s"]
 [ext_resource type="Material" uid="uid://ci8fr3n7t2pef" path="res://Shaders/CRT_Edited.tres" id="2_fayp4"]
 [ext_resource type="Script" path="res://Scripts/Game/spawner.gd" id="3_4168k"]
+[ext_resource type="Script" path="res://Scripts/Game/map.gd" id="4_1f6ma"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htqpo"]
+size = Vector2(1408, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_anisj"]
+size = Vector2(16, 848)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_57bn7"]
+size = Vector2(1408, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mhy7j"]
+size = Vector2(16, 848)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_nkw48")
@@ -11,13 +24,22 @@ script = ExtResource("1_nkw48")
 [node name="Player" parent="." instance=ExtResource("1_ttd3s")]
 position = Vector2(640, 360)
 scale = Vector2(0.5, 0.5)
+motion_mode = 1
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Player"]
+position = Vector2(-4.19617e-05, -2.47955e-05)
+scale = Vector2(3.2, 3.2)
 
 [node name="Lasers" type="Node" parent="."]
 
 [node name="Enemies" type="Node" parent="."]
 script = ExtResource("3_4168k")
 
+[node name="Map" type="Node" parent="."]
+script = ExtResource("4_1f6ma")
+
 [node name="ColorRect_Shader" type="ColorRect" parent="."]
+visible = false
 z_index = 500
 material = ExtResource("2_fayp4")
 anchors_preset = 15
@@ -32,6 +54,62 @@ mouse_filter = 2
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 
+[node name="TopBarrier" type="StaticBody2D" parent="."]
+
+[node name="TopColShape" type="CollisionShape2D" parent="TopBarrier"]
+position = Vector2(640, 0)
+shape = SubResource("RectangleShape2D_htqpo")
+
+[node name="TopColorRect" type="ColorRect" parent="TopBarrier"]
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 1344.0
+offset_bottom = 8.0
+color = Color(0.729412, 0.12549, 0.145098, 1)
+
+[node name="RightBarrier" type="StaticBody2D" parent="."]
+position = Vector2(1280, 720)
+
+[node name="RightColShape" type="CollisionShape2D" parent="RightBarrier"]
+position = Vector2(0, -360)
+shape = SubResource("RectangleShape2D_anisj")
+
+[node name="RightColorRect" type="ColorRect" parent="RightBarrier"]
+offset_left = -8.0
+offset_top = -784.0
+offset_right = 8.0
+offset_bottom = 64.0
+color = Color(0.729412, 0.12549, 0.145098, 1)
+
+[node name="BottomBarrier" type="StaticBody2D" parent="."]
+position = Vector2(1280, 720)
+
+[node name="BottomColShape" type="CollisionShape2D" parent="BottomBarrier"]
+position = Vector2(-640, 0)
+shape = SubResource("RectangleShape2D_57bn7")
+
+[node name="BottomColorRect" type="ColorRect" parent="BottomBarrier"]
+offset_left = -1344.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+color = Color(0.729412, 0.12549, 0.145098, 1)
+
+[node name="LeftBarrier" type="StaticBody2D" parent="."]
+
+[node name="LeftColShape" type="CollisionShape2D" parent="LeftBarrier"]
+position = Vector2(0, 360)
+shape = SubResource("RectangleShape2D_mhy7j")
+
+[node name="LeftColorRect" type="ColorRect" parent="LeftBarrier"]
+offset_left = -8.0
+offset_top = -64.0
+offset_right = 8.0
+offset_bottom = 784.0
+color = Color(0.729412, 0.12549, 0.145098, 1)
+
+[connection signal="enteredRoom" from="." to="." method="_on_entered_room"]
 [connection signal="player_laser_shot" from="Player" to="." method="_on_player_laser_shot"]
+[connection signal="screen_exited" from="Player/VisibleOnScreenNotifier2D" to="." method="_on_player_screen_exited"]
 [connection signal="enemySpawned" from="Enemies" to="." method="_on_enemy_spawned"]
 [connection signal="timeout" from="EnemySpawnTimer" to="Enemies" method="_on_enemy_spawn_timer_timeout"]

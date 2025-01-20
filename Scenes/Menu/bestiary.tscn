@@ -1029,6 +1029,7 @@ theme_override_font_sizes/font_size = 36
 text = "Back"
 
 [node name="ColorRect_Shader" type="ColorRect" parent="."]
+visible = false
 material = ExtResource("2_14u78")
 layout_mode = 1
 anchors_preset = 15

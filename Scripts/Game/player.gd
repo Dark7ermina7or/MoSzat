@@ -53,6 +53,7 @@ func _ready() -> void:
 	MuzzleMain_defRot = $MuzzleMain.position
 	#print("asd")
 	add_to_group("Player")
+	score = 0
 	
 	set_collision_layer(0x0)
 	set_collision_layer_value(2, true)
@@ -118,7 +119,7 @@ func death():
 	if score > get_parent().highscore:
 		ConfigFileHandler.save_score_settings("score", score)
 	
-	SceneTransition.scene_transition("res://Scenes/Menu/menu.tscn")
+	SceneTransition.scene_transitionMsg("res://Scenes/Menu/menu.tscn", "DEATH")
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is Laser:
